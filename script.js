@@ -10,6 +10,19 @@ for (let i = 0; i < fliesArray.length; i++) {
 	fly.classList.add("fly");
 	fly.src = "images/fly.svg";
 	div.appendChild(fly);
+	fly.addEventListener("click", function () {
+		fly.style.display = "none";
+		//add +1 to the score at the top
+		//update the score in the local storage
+		//render +1 next to the fly
+		let plusOne = document.createElement("span");
+		plusOne.textContent = "+1";
+		plusOne.classList.add("plus_one");
+		div.appendChild(plusOne);
+		setTimeout(() => {
+			div.removeChild(plusOne);
+		}, 300);
+	});
 }
 
 //I take control of the flies to animate them
