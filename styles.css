@@ -33,3 +33,31 @@ body {
   color: var(--fg);
   font-family: var(--body);
 }
+
+/* Game container: stats bar and pond */
+#game-container {
+  width: 640px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+#stats {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+#stats span {
+  font-weight: bold;
+  color: var(--fg);
+}
+
+#pond {
+  position: relative;
+  height: 450px;
+  background-color: var(--pond);
+  border-radius: 16px;
+}
