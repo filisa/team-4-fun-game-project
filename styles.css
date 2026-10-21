@@ -1,1 +1,16 @@
-/* right now its empty */
+@keyframes myAnimation {
+	from {
+		right: 0px;
+	}
+	to {
+		top: 200px;
+	}
+}
+
+#fly {
+	position: absolute;
+	animation-name: myAnimation;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease;
+}
