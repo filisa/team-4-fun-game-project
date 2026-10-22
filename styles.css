@@ -1,3 +1,45 @@
+@keyframes fly-across {
+	0% {
+		left: -5%;
+		top: var(--start-y);
+	}
+
+	25% {
+		left: 25%;
+		top: var(--middle-y);
+	}
+
+	50% {
+		left: 50%;
+		top: var(--centre-y);
+	}
+
+	75% {
+		left: 75%;
+		top: var(--near-end-y);
+	}
+
+	100% {
+		left: 105%;
+		top: var(--end-y);
+	}
+}
+
+.fly {
+	position: absolute;
+	animation-name: fly-across;
+	animation-duration: var(--duration);
+	animation-delay: var(--delay);
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+#game_div {
+	position: relative;
+	height: 50vw;
+	width: 50vw;
+	margin: 0;
+	padding: 0;
 :root {
   /* Page and cards */
   --bg: #fbfaf6;
