@@ -17,8 +17,8 @@ for (let i = 0; i < fliesArray.length; i++) {
 		//render +1 next to the fly
 		let plusOne = document.createElement("span");
 		plusOne.textContent = "+1";
-		plusOne.classList.add("plus_one");
 		div.appendChild(plusOne);
+
 		setTimeout(() => {
 			div.removeChild(plusOne);
 		}, 300);
