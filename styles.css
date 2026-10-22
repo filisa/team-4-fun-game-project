@@ -101,6 +101,7 @@ body {
 
 #pond {
   position: relative;
+  overflow: hidden;
   height: 330px;
   background-color: var(--pond);
   border-radius: 16px;
