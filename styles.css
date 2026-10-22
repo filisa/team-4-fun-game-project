@@ -26,6 +26,7 @@
 }
 
 .fly {
+	height: 3.5vw;
 	position: absolute;
 	animation-name: fly-across;
 	animation-duration: var(--duration);
@@ -34,38 +35,30 @@
 	animation-timing-function: linear;
 }
 
-#game_div {
-	position: relative;
-	height: 50vw;
-	width: 50vw;
-	margin: 0;
-	padding: 0;
-}
-
 /* Page and cards */
 :root {
-  --bg: #fbfaf6;
-  --surface: #ffffff;
-  --line: #e2ded2;
+	--bg: #fbfaf6;
+	--surface: #ffffff;
+	--line: #e2ded2;
 
-  /* Pond scene */
-  --pond: #cfe8e6;
-  --pond-deep: #afd6d3;
-  --lily: #7dba6a;
+	/* Pond scene */
+	--pond: #cfe8e6;
+	--pond-deep: #afd6d3;
+	--lily: #7dba6a;
 
-  /* Characters */
-  --frog: #58ae4a;
-  --frog-dark: #2f7a35;
-  --fly: #2a2926;
-  --tongue: #e8607a;
+	/* Characters */
+	--frog: #58ae4a;
+	--frog-dark: #2f7a35;
+	--fly: #2a2926;
+	--tongue: #e8607a;
 
-  /* Text */
-  --fg: #23211c;
-  --muted: #6b675c;
+	/* Text */
+	--fg: #23211c;
+	--muted: #6b675c;
 
-  /* Fonts */
-  --display: "Baloo 2", system-ui, sans-serif;
-  --body: "Nunito Sans", system-ui, sans-serif;
+	/* Fonts */
+	--display: "Baloo 2", system-ui, sans-serif;
+	--body: "Nunito Sans", system-ui, sans-serif;
 }
 
 /* ==========================================
@@ -73,48 +66,48 @@
    ========================================== */
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--body);
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--body);
 }
 
 /* Game container: stats bar and pond */
 #game-container {
-  width: 480px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 22px;
+	width: 480px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: 22px;
 }
 
 #stats {
-  display: flex;
-  justify-content: space-between;
-  color: var(--muted);
+	display: flex;
+	justify-content: space-between;
+	color: var(--muted);
 }
 
 #stats span {
-  font-weight: bold;
-  color: var(--fg);
+	font-weight: bold;
+	color: var(--fg);
 }
 
 #pond {
-  position: relative;
-  overflow: hidden;
-  height: 330px;
-  background-color: var(--pond);
-  border-radius: 16px;
+	position: relative;
+	overflow: hidden;
+	height: 330px;
+	background-color: var(--pond);
+	border-radius: 16px;
 }
 
 /* Responsiveness - Media query for small screens */
 @media (max-width: 520px) {
-  #game-container {
-    width: auto;
-    margin: 16px;
-  }
+	#game-container {
+		width: auto;
+		margin: 16px;
+	}
 
-  #pond {
-    height: 240px;
-  }
+	#pond {
+		height: 240px;
+	}
 }
