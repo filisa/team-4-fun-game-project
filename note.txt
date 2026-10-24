@@ -1,0 +1,26 @@
+The main idea of the game:
+1. the player opens the website
+2. The game shows the pop-up with the name of the game and tap to start
+3. The player taps on start
+4. The counter starts from 30 sec to 0 sec
+5. Player can click on flies and each fly the long tongue touches disappears (I'm not sure how to do this one..)
+6. Player gets 1 point for each fly. 
+7. When you eat one fly, more flies appear
+8. When you reach a certain score the flies fly faster.
+9. After 30 sec there is a message with your score and the best score.  
+
+
+Parts of the game:
+
+The score counter
+The flies
+The frog
+The frog's tongue
+The timer
+Best score 
+Welcome message
+Game end message
+Footer and header outside the game
+
+
+
