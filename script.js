@@ -1,7 +1,7 @@
 //I am taking control of the div where flies will be
 let div = document.getElementById("pond");
 let score = document.getElementById("score");
-let frog = document.getElementById("frog")
+let frog = document.getElementById("frog");
 //I put the flies in the array in case I want to add more flies
 const fliesArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
