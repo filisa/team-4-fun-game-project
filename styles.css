@@ -107,6 +107,13 @@ body {
   border-radius: 16px;
 }
 
+#frog {
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  left: 40%;
+  }
+
 /* Responsiveness - Media query for small screens */
 @media (max-width: 520px) {
   #game-container {
