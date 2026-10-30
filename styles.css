@@ -101,12 +101,29 @@ body {
 }
 
 #frog {
-  position: absolute;
-  bottom: 0;
-  width: 100px;
-  left: 40%;
-  }
+	position: absolute;
+	bottom: 0;
+	width: 100px;
+	left: 40%;
+	size: 30px;
+	}
 
+#tongue {
+	position: absolute;
+	height: 8px;
+	width: 0;
+	background-color:#e8607a;
+	 border-radius: 999px;
+	 transform-origin: left center;
+	 transform: translateY(-50%) rotate(var(--angle, 0rad)) scaleX(0);
+	 transition: transform 0.30s ease-in-out;
+	 z-index: 3;
+	 pointer-events: none;
+}
+
+#tongue.tongue-out {
+	transform: translateY(-50%) rotate(var(--angle, 0rad)) scaleX(1);
+}
 /* Responsiveness - Media query for small screens */
 @media (max-width: 520px) {
 	#game-container {
