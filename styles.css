@@ -121,6 +121,11 @@ body {
 	cursor: pointer;
 }
 
+/* Hidden welcome screen, class added by JavaScript on click */
+#welcome-screen.hidden {
+	display: none;
+}
+
 /* The white box in the middle */
 .panel {
 	padding: 24px 48px;

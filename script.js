@@ -42,7 +42,7 @@ flies.forEach((fly) => {
 const welcomeScreen = document.getElementById("welcome-screen");
 
 function hideWelcomeScreen() {
-	welcomeScreen.style.display = "none";
+	welcomeScreen.classList.add("hidden");
 }
 
 welcomeScreen.addEventListener("click", hideWelcomeScreen);
