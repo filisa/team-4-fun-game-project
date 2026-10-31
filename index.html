@@ -1,32 +1,40 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hungry Frog</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito+Sans:wght@400;600;700&display=swap"
-    />
-  </head>
-  <body>
-    <h1>Hungry Frog</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hungry Frog</title>
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito+Sans:wght@400;600;700&display=swap"
+		/>
+	</head>
+	<body>
+		<h1>Hungry Frog</h1>
 
-    <!-- Game container: stats bar and pond -->
-    <main id="game-container">
-      <div id="stats">
-        <p>Flies <span id="score">0</span></p>
-        <p>Time <span id="timer">30</span></p>
-        <p>Best <span id="best">0</span></p>
-      </div>
+		<!-- Game container: stats bar and pond -->
+		<main id="game-container">
+			<div id="stats">
+				<p>Flies <span id="score">0</span></p>
+				<p>Time <span id="timer">30</span></p>
+				<p>Best <span id="best">0</span></p>
+			</div>
 
-      <div id="pond">
-        <img id="frog" src="images/frog.svg" alt="frog in the pond">
-      </div>
-    </main>
+			<div id="pond">
+				<img id="frog" src="images/frog.svg" alt="frog in the pond" />
 
-    <script src="script.js"></script>
-  </body>
+				<!--Welcome screen that disappears on tap -->
+				<section id="welcome-screen">
+					<div class="panel">
+						<h2>Hungry frog</h2>
+						<button id="start-button">Tap to start</button>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<script src="script.js"></script>
+	</body>
 </html>

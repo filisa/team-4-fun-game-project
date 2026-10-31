@@ -37,3 +37,12 @@ flies.forEach((fly) => {
 
 	fly.style.setProperty("--delay", `${Math.random() * 1.1}s`);
 });
+
+//Welcome screen: hides when you click it
+const welcomeScreen = document.getElementById("welcome-screen");
+
+function hideWelcomeScreen() {
+	welcomeScreen.classList.add("hidden");
+}
+
+welcomeScreen.addEventListener("click", hideWelcomeScreen);
