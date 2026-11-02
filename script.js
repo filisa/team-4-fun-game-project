@@ -145,4 +145,20 @@ function hideWelcomeScreen() {
 	welcomeScreen.classList.add("hidden");
 }
 
-welcomeScreen.addEventListener("click", hideWelcomeScreen);
+welcomeScreen.addEventListener("click", function () {
+	hideWelcomeScreen();
+	countDown();
+	timerId = setInterval(countDown, 1000);
+});
+
+let timeLeft = 30;
+let timerId = null;
+
+function countDown() {
+	timeLeft = timeLeft - 1;
+	timerEl.textContent = timeLeft;
+
+	if (timeLeft === 0) {
+		clearInterval(timerId);
+	}
+}
