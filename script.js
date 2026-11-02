@@ -137,3 +137,12 @@ function renderTheBestScore() {
 	//change the html
 	bestEl.textContent = getTheBestScore();
 }
+
+//Welcome screen: hides when you click it
+const welcomeScreen = document.getElementById("welcome-screen");
+
+function hideWelcomeScreen() {
+	welcomeScreen.classList.add("hidden");
+}
+
+welcomeScreen.addEventListener("click", hideWelcomeScreen);
