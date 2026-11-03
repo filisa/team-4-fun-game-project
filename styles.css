@@ -98,6 +98,8 @@ body {
 	height: 330px;
 	background-color: var(--pond);
 	border-radius: 16px;
+	user-select: none;
+  -webkit-user-select: none;
 }
 
 #frog {
