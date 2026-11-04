@@ -69,6 +69,7 @@ body {
 	background: var(--bg);
 	color: var(--fg);
 	font-family: var(--body);
+	margin: 0;
 }
 
 /* Game container: stats bar and pond */
