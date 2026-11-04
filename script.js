@@ -151,14 +151,40 @@ welcomeScreen.addEventListener("click", function () {
 	timerId = setInterval(countDown, 1000);
 });
 
-let timeLeft = 30;
-let timerId = null;
+let timeLeft = 30; // seconds left in the game
+let timerId = null; //empty box for the timer's number, filled when game starts
 
 function countDown() {
-	timeLeft = timeLeft - 1;
-	timerEl.textContent = timeLeft;
+	timeLeft = timeLeft - 1; //take away one second
+	timerEl.textContent = timeLeft; //show the new time on the page
 
 	if (timeLeft === 0) {
-		clearInterval(timerId);
+		//when time runs out
+		clearInterval(timerId); //stop the timer
+		showEndScreen(); //show the end screen with the score
 	}
 }
+
+//End screen: shows when the time runs out
+const endScreen = document.getElementById("end-screen");
+const finalScore = document.getElementById("final-score");
+
+function showEndScreen() {
+	finalScore.textContent = score;
+	endScreen.classList.remove("hidden");
+	renderTheBestScore();
+}
+
+//Play again: reset and start a new round
+const playAgainButton = document.getElementById("play-again");
+
+function playAgain() {
+	score = 0;
+	scoreEl.textContent = 0;
+	timeLeft = 30;
+	timerEl.textContent = 30;
+	endScreen.classList.add("hidden");
+	timerId = setInterval(countDown, 1000);
+}
+
+playAgainButton.addEventListener("click", playAgain);
