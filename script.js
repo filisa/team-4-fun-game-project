@@ -5,6 +5,35 @@ const tongue = document.getElementById("tongue");
 const scoreEl = document.getElementById("score");
 const timerEl = document.getElementById("timer");
 const bestEl = document.getElementById("best");
+//End screen: shows when the time runs out
+const endScreen = document.getElementById("end-screen");
+const finalScore = document.getElementById("final-score");
+let timeLeft = 30; // seconds left in the game
+let timerId = null; //empty box for the timer's number, filled when game starts
+//Welcome screen: hides when you click it
+const welcomeScreen = document.getElementById("welcome-screen");
+renderTheBestScore();
+
+function hideWelcomeScreen() {
+	welcomeScreen.classList.add("hidden");
+}
+
+welcomeScreen.addEventListener("click", function () {
+	hideWelcomeScreen();
+	countDown();
+	timerId = setInterval(countDown, 1000);
+});
+
+function countDown() {
+	timeLeft = timeLeft - 1; //take away one second
+	timerEl.textContent = timeLeft; //show the new time on the page
+
+	if (timeLeft === 0) {
+		//when time runs out
+		clearInterval(timerId); //stop the timer
+		showEndScreen(); //show the end screen with the score
+	}
+}
 
 //create one fly and adjust how it moves across the screen
 function randomPercent() {
@@ -73,7 +102,7 @@ let tongueBusy = false;
 
 //what should happen when we click?
 pond.addEventListener("click", function (event) {
-	if (tongueBusy) return;
+	if (timeLeft === 0) return;
 	tongueBusy = true;
 
 	//pond location
@@ -111,12 +140,11 @@ pond.addEventListener("click", function (event) {
 	}, TONGUE_TIME);
 });
 
-renderTheBestScore();
 //this function will trigger when the game is over
 function getTheBestScore() {
 	//get the score from score field in html
-	let oneScore = scoreEl.textContent;
-	let scoreFromStorage = localStorage.getItem("highScore", oneScore);
+	let oneScore = Number(scoreEl.textContent); //turn the text into a number
+	let scoreFromStorage = Number(localStorage.getItem("highScore", oneScore)); //turn the text into number
 	// if we have stuff in storage and new score is not 0, and new score is higher than
 	//score from storage, we rewrite the best score.
 	if (scoreFromStorage && oneScore > 0 && oneScore > scoreFromStorage) {
@@ -138,39 +166,8 @@ function renderTheBestScore() {
 	bestEl.textContent = getTheBestScore();
 }
 
-//Welcome screen: hides when you click it
-const welcomeScreen = document.getElementById("welcome-screen");
-
-function hideWelcomeScreen() {
-	welcomeScreen.classList.add("hidden");
-}
-
-welcomeScreen.addEventListener("click", function () {
-	hideWelcomeScreen();
-	countDown();
-	timerId = setInterval(countDown, 1000);
-});
-
-let timeLeft = 30; // seconds left in the game
-let timerId = null; //empty box for the timer's number, filled when game starts
-
-function countDown() {
-	timeLeft = timeLeft - 1; //take away one second
-	timerEl.textContent = timeLeft; //show the new time on the page
-
-	if (timeLeft === 0) {
-		//when time runs out
-		clearInterval(timerId); //stop the timer
-		showEndScreen(); //show the end screen with the score
-	}
-}
-
-//End screen: shows when the time runs out
-const endScreen = document.getElementById("end-screen");
-const finalScore = document.getElementById("final-score");
-
 function showEndScreen() {
-	finalScore.textContent = score;
+	finalScore.textContent = scoreEl.textContent;
 	endScreen.classList.remove("hidden");
 	renderTheBestScore();
 }
