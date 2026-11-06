@@ -1,6 +1,6 @@
 # team-4-fun-game-project
 
-This game was put together by the collective efforts of the following team memembers: Ayodeji Dairo,Faryal Zahid,Magarita Nikulina and Konstantina Migadaki. 
+This game was put together by the collective efforts of the following team members: Ayodeji Dairo,Faryal Zahid,Magarita Nikulina and Konstantina Migadaki. 
 And the basic project requirements was duly complied in terms of the game design/functionality, javascript application techniques,code structure,user interface and score tracks & records.
 
 
