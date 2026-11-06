@@ -73,7 +73,6 @@
 	top: 0;
 	z-index: 1000;
 	margin-bottom: 4vw;
-
 }
 
 .header-container {
@@ -224,6 +223,12 @@ body {
 	padding: 2rem 1rem 1rem;
 	font-family: var(--body), sans-serif;
 	margin-top: 4vw;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
 
 .footer-container {
