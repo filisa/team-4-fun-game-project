@@ -167,7 +167,7 @@ function renderTheBestScore() {
 }
 
 function showEndScreen() {
-	finalScore.textContent = scoreEl.textContent;
+	finalScore.textContent = score;
 	endScreen.classList.remove("hidden");
 	renderTheBestScore();
 }
