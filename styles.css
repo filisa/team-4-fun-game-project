@@ -237,6 +237,25 @@ body {
 	display: none;
 }
 
+.rules {
+	list-style: none;
+	padding: 0;
+	margin: 12px 0;
+	color: var(--muted);
+	font-size: 15px;
+	text-align: center;
+}
+
+.rules li {
+	margin-bottom: 6px;
+}
+
+@media (max-width: 520px) {
+	.panel {
+		padding: 24px 16px;
+	}
+}
+
 /* The white box in the middle */
 .panel {
 	padding: 24px 48px;
