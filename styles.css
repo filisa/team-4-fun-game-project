@@ -184,11 +184,64 @@ body {
 #tongue.tongue-out {
 	transform: translateY(-50%) rotate(var(--angle, 0rad)) scaleX(1);
 }
+
+/* ==========================================
+   Accessibility
+   ========================================== */
+
+/* Hidden on screen but still read by screen readers */
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Clear focus ring for keyboard users */
+#pond:focus-visible,
+#start-button:focus-visible,
+#play-again:focus-visible {
+	outline: 3px solid var(--frog-dark);
+	outline-offset: 3px;
+}
+
+/* Aim marker: a ring that keyboard players move with the arrow keys */
+#aim {
+	display: none;
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	transform: translate(-50%, -50%);
+	border: 3px solid var(--frog-dark);
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px var(--surface);
+	pointer-events: none;
+	z-index: 3;
+}
+
+/* Only show it while the pond has keyboard focus */
+#pond:focus-visible #aim {
+	display: block;
+}
+
+/* Less motion if the device asks for it */
+@media (prefers-reduced-motion: reduce) {
+	#tongue {
+		transition-duration: 0.1s;
+	}
+}
 /* Responsiveness - Media query for small screens */
 @media (max-width: 520px) {
 	#game-container {
 		width: auto;
-		margin: 0 16px 16px;
+		/* top auto + footer's margin-top auto split the free space,
+		   so the game sits in the vertical middle of the page */
+		margin: auto 16px 16px;
 	}
 
 	#pond {
@@ -198,7 +251,7 @@ body {
 		--fly-size: 6vw;
 	}
 	.intro {
-		padding-top: 56px;
+		padding-top: 80px;
 	}
 	.lede {
 		font-size: 16px;
@@ -293,10 +346,15 @@ body {
 #start-button,
 #play-again {
 	margin-top: 4px;
-	padding: 0;
+	/* big enough to tap easily (at least 44px tall) */
+	min-height: 44px;
+	padding: 8px 16px;
 	border: none;
+	border-radius: 999px;
 	background: none;
 	color: var(--muted);
+	text-decoration: underline;
+	text-underline-offset: 3px;
 	font-family: var(--body);
 	font-size: 16px;
 	cursor: pointer;
@@ -306,6 +364,7 @@ body {
 	margin-top: auto;
 	padding: 24px 16px 32px;
 	border-top: 1px solid var(--line);
+	background-color: #eef5ea;
 	text-align: center;
 	color: var(--muted);
 }

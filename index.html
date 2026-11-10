@@ -29,21 +29,30 @@
 				<p>Best <span id="best">0</span></p>
 			</div>
 
-			<div id="pond">
+			<!-- Screen reader announcements (score, time, end of game). Visually hidden. -->
+			<p id="announcer" class="visually-hidden" aria-live="polite"></p>
+
+			<!-- tabindex makes the pond reachable with the keyboard;
+			     role="application" lets arrow keys reach our code instead of the screen reader -->
+			<div
+				id="pond"
+				tabindex="0"
+				role="application"
+				aria-label="Pond. Arrow keys to aim, Space or Enter to shoot the tongue."
+			>
 				<!--Welcome screen that disappears on tap -->
-				<section id="welcome-screen">
+				<section id="welcome-screen" aria-labelledby="welcome-title">
 					<div class="panel">
-						<h2>Hungry frog</h2>
-						<ul class="rules">
-				
+						<h2 id="welcome-title">Hungry frog</h2>
+		
 						<button id="start-button">Tap to start</button>
 					</div>
 				</section>
 
 				<!-- End screen: shows when the time runs out -->
-				<section id="end-screen" class="hidden">
+				<section id="end-screen" class="hidden" aria-labelledby="end-title">
 					<div class="panel">
-						<h2>Time's up!</h2>
+						<h2 id="end-title">Time's up!</h2>
 						<p>You caught <span id="final-score">0</span> flies.</p>
 						<button id="play-again">Play again</button>
 					</div>
@@ -51,9 +60,11 @@
 
 				<img id="frog" src="images/frog.svg" alt="frog in the pond" />
 				<div id="tongue"></div>
+				<!-- Aim marker for keyboard players, only shown when the pond has keyboard focus -->
+				<div id="aim" aria-hidden="true"></div>
 			</div>
 		</main>
-		<p class="caption">Tap to start, then tap where you want the tongue to go.</p>
+		
 		<script src="script.js"></script>
 
 		<!-- Footer: frog icon and team names -->

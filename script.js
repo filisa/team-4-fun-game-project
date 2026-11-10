@@ -10,6 +10,19 @@ const endScreen = document.getElementById("end-screen");
 const finalScore = document.getElementById("final-score");
 let timeLeft = 30; // seconds left in the game
 let timerId = null; //empty box for the timer's number, filled when game starts
+//Accessibility helpers
+const announcer = document.getElementById("announcer");
+const aim = document.getElementById("aim");
+let playing = false; // true only while a round is running
+
+// screen readers read out whatever text we put in the announcer
+function announce(message) {
+	announcer.textContent = message;
+}
+
+// people who asked their device for less motion get slower flies
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 //Welcome screen: hides when you click it
 const welcomeScreen = document.getElementById("welcome-screen");
 renderTheBestScore();
@@ -18,8 +31,12 @@ function hideWelcomeScreen() {
 	welcomeScreen.classList.add("hidden");
 }
 
-welcomeScreen.addEventListener("click", function () {
+welcomeScreen.addEventListener("click", function (event) {
+	event.stopPropagation(); // starting the game should not also shoot the tongue
 	hideWelcomeScreen();
+	playing = true;
+	pond.focus(); // keyboard players can aim right away
+	announce("Game started. 30 seconds.");
 	countDown();
 	timerId = setInterval(countDown, 1000);
 });
@@ -27,6 +44,11 @@ welcomeScreen.addEventListener("click", function () {
 function countDown() {
 	timeLeft = timeLeft - 1; //take away one second
 	timerEl.textContent = timeLeft; //show the new time on the page
+
+	// tell screen reader users the time now and then, not every second
+	if (timeLeft === 10 || timeLeft === 5) {
+		announce(timeLeft + " seconds left.");
+	}
 
 	if (timeLeft === 0) {
 		//when time runs out
@@ -51,7 +73,8 @@ function createFly() {
 	fly.style.setProperty("--centre-y", randomPercent());
 	fly.style.setProperty("--near-end-y", randomPercent());
 	fly.style.setProperty("--end-y", randomPercent());
-	fly.style.setProperty("--duration", `${Math.random() * 3 + 3}s`);
+	const slowDown = reduceMotion ? 2 : 1; // twice as slow with reduced motion
+	fly.style.setProperty("--duration", `${(Math.random() * 3 + 3) * slowDown}s`);
 	fly.style.setProperty("--delay", `-${Math.random() * 4}s`);
 
 	pond.appendChild(fly);
@@ -90,6 +113,7 @@ function catchFliesAt(x, y) {
 		if (distance < CATCH_RADIUS) {
 			score++; // +1 point
 			scoreEl.textContent = score; // show it on the page
+			announce("Caught one! " + score + (score === 1 ? " fly." : " flies."));
 			fly.remove(); // the fly is gone
 			createFly(); // a new fly arrives
 		}
@@ -102,13 +126,45 @@ let tongueBusy = false;
 
 //what should happen when we click?
 pond.addEventListener("click", function (event) {
-	if (timeLeft === 0) return;
-	tongueBusy = true;
+	if (!playing) return;
 
 	//pond location
 	const pondBox = pond.getBoundingClientRect();
-	const clickX = event.clientX - pondBox.left;
-	const clickY = event.clientY - pondBox.top;
+	shootAt(event.clientX - pondBox.left, event.clientY - pondBox.top);
+});
+
+//Keyboard play: arrow keys move the aim marker, Space or Enter shoots
+let aimX = 50; // aim position in % of the pond width
+let aimY = 40; // aim position in % of the pond height
+const AIM_STEP = 5; // how far one arrow key press moves the aim (%)
+
+function moveAim() {
+	aim.style.left = aimX + "%";
+	aim.style.top = aimY + "%";
+}
+moveAim();
+
+pond.addEventListener("keydown", function (event) {
+	if (!playing) return;
+
+	if (event.key === "ArrowLeft") aimX = Math.max(0, aimX - AIM_STEP);
+	else if (event.key === "ArrowRight") aimX = Math.min(100, aimX + AIM_STEP);
+	else if (event.key === "ArrowUp") aimY = Math.max(0, aimY - AIM_STEP);
+	else if (event.key === "ArrowDown") aimY = Math.min(100, aimY + AIM_STEP);
+	else if (event.key === " " || event.key === "Enter") {
+		shootAt((aimX / 100) * pond.clientWidth, (aimY / 100) * pond.clientHeight);
+	} else {
+		return; // any other key: let the browser handle it (like Tab)
+	}
+
+	event.preventDefault(); // stop arrow keys and Space from scrolling the page
+	moveAim();
+});
+
+//shoot the tongue at a point inside the pond (works for clicks and keys)
+function shootAt(clickX, clickY) {
+	if (tongueBusy) return;
+	tongueBusy = true;
 
 	// frog's mouth
 	const mouthX = frog.offsetLeft + frog.offsetWidth / 2;
@@ -139,7 +195,7 @@ pond.addEventListener("click", function (event) {
 			tongueBusy = false;
 		}, TONGUE_TIME);
 	}, TONGUE_TIME);
-});
+}
 
 //this function will trigger when the game is over
 function getTheBestScore() {
@@ -169,19 +225,29 @@ function renderTheBestScore() {
 
 function showEndScreen() {
 	finalScore.textContent = score;
+	playing = false;
 	endScreen.classList.remove("hidden");
 	renderTheBestScore();
+	announce(
+		"Time's up! You caught " + score + (score === 1 ? " fly." : " flies.") +
+			" Best score " + bestEl.textContent + "."
+	);
+	playAgainButton.focus(); // keyboard players land on Play again
 }
 
 //Play again: reset and start a new round
 const playAgainButton = document.getElementById("play-again");
 
-function playAgain() {
+function playAgain(event) {
+	event.stopPropagation(); // restarting should not also shoot the tongue
+	playing = true;
 	score = 0;
 	scoreEl.textContent = 0;
 	timeLeft = 30;
 	timerEl.textContent = 30;
 	endScreen.classList.add("hidden");
+	pond.focus(); // back to the pond so keyboard players can keep aiming
+	announce("New game. 30 seconds.");
 	timerId = setInterval(countDown, 1000);
 }
 
