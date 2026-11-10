@@ -250,11 +250,7 @@ body {
 	margin-bottom: 6px;
 }
 
-@media (max-width: 520px) {
-	.panel {
-		padding: 24px 16px;
-	}
-}
+
 
 /* The white box in the middle */
 .panel {
@@ -267,6 +263,12 @@ body {
 .panel h2 {
 	font-family: var(--display);
 	margin: 0;
+}
+
+@media (max-width: 520px) {
+	.panel {
+		padding: 24px 16px;
+	}
 }
 
 /* Start & play again button: look like plain text */
