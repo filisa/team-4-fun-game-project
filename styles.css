@@ -27,6 +27,7 @@
 
 .fly {
 	position: absolute;
+	height: var(--fly-size);
 	animation-name: fly-across;
 	animation-duration: var(--duration);
 	animation-delay: var(--delay);
@@ -54,6 +55,10 @@
 	/* Text */
 	--fg: #23211c;
 	--muted: #6b675c;
+
+	/* Sizes: the frog is always this many flies wide */
+	--fly-size: 6vw;
+	--frog-to-fly: 2.75;
 
 	/* Fonts */
 	--display: "Baloo 2", system-ui, sans-serif;
@@ -151,7 +156,7 @@ body {
 	right: 0;
 	margin: 0 auto;
 	/* Grow with the pond, but never too tiny or too huge */
-	width: 56px; /* phone size */
+	width: calc(var(--fly-size) * var(--frog-to-fly));
 }
 
 #tongue {
@@ -180,8 +185,8 @@ body {
 	#pond {
 		height: 240px;
 	}
-	.fly {
-		height: 6vw;
+	:root {
+		--fly-size: 6vw;
 	}
 	.footer-links {
 		display: none;
@@ -198,8 +203,8 @@ body {
 		min-height: 100dvh;
 	}
 
-	.fly {
-		height: 2vw;
+	:root {
+		--fly-size: 2vw;
 	}
 	#game-container {
 		width: 40vw;
@@ -208,15 +213,11 @@ body {
 	#pond {
 		height: 20vw;
 	}
-	/* Main screen frog: small, scales with the window */
-	#frog {
-		width: clamp(58px, calc(5.5vw + 2px), 122px);
-	}
 }
 
 @media (min-width: 2000px) {
-	.fly {
-		height: 1.5vw;
+	:root {
+		--fly-size: 1.5vw;
 	}
 	#game-container {
 		width: 50vw;
