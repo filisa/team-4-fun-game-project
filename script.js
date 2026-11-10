@@ -112,7 +112,8 @@ pond.addEventListener("click", function (event) {
 
 	// frog's mouth
 	const mouthX = frog.offsetLeft + frog.offsetWidth / 2;
-	const mouthY = frog.offsetTop + 50;
+	// mouth sits ~60% down the frog image, so it works at any frog size
+	const mouthY = frog.offsetTop + frog.offsetHeight * 0.6;
 
 	//lets calculate which way and how far?
 	const dx = clickX - mouthX;

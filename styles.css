@@ -145,8 +145,13 @@ body {
 #frog {
 	position: absolute;
 	bottom: 0;
-	left: 40%;
-	width: 100px;
+	/* Center horizontally at any screen size.
+	   (margin auto keeps offsetLeft accurate for the tongue in script.js) */
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	/* Grow with the pond, but never too tiny or too huge */
+	width: 56px; /* phone size */
 }
 
 #tongue {
@@ -202,6 +207,10 @@ body {
 	}
 	#pond {
 		height: 20vw;
+	}
+	/* Main screen frog: small, scales with the window */
+	#frog {
+		width: clamp(58px, calc(5.5vw + 2px), 122px);
 	}
 }
 
