@@ -79,6 +79,8 @@ function catchFliesAt(x, y) {
 	const allFlies = pond.querySelectorAll(".fly");
 
 	allFlies.forEach(function (fly) {
+		if (fly.dataset.caught) return;
+
 		// ask the browser where this fly is right now (CSS is moving it)
 		const box = fly.getBoundingClientRect();
 		const flyX = box.left - pondBox.left + box.width / 2;
@@ -88,10 +90,15 @@ function catchFliesAt(x, y) {
 		const distance = Math.hypot(flyX - x, flyY - y);
 
 		if (distance < CATCH_RADIUS) {
+			fly.dataset.caught = "true";
 			score++; // +1 point
 			scoreEl.textContent = score; // show it on the page
-			fly.remove(); // the fly is gone
-			createFly(); // a new fly arrives
+			fly.src = "images/plus1.png";
+
+			setTimeout(() => {
+				fly.remove(); // the fly is gone
+				createFly(); // a new fly arrives
+			}, 200);
 		}
 	});
 }
@@ -138,6 +145,7 @@ pond.addEventListener("click", function (event) {
 			tongueBusy = false;
 		}, TONGUE_TIME);
 	}, TONGUE_TIME);
+	changeFlyColor();
 });
 
 //this function will trigger when the game is over
@@ -185,3 +193,21 @@ function playAgain() {
 }
 
 playAgainButton.addEventListener("click", playAgain);
+
+function changeFlyColor() {
+	if (score >= 5 && score < 15) {
+		frog.src = "images/frog_blue.svg";
+	} else if (score >= 15 && score < 20) {
+		frog.src = "images/frog_pink.svg";
+	} else if (score >= 20 && score < 25) {
+		frog.src = "images/frog_yellow.svg";
+	} else if (score >= 25 && score < 30) {
+		frog.src = "images/frog_diamond.svg";
+	} else if (score >= 30 && score < 50) {
+		frog.src = "images/frog_gold.svg";
+	} else if (score >= 50) {
+		frog.src = "images/frog_holographic.svg";
+	} else {
+		frog.src = "images/frog.svg";
+	}
+}
