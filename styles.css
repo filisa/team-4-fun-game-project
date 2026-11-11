@@ -154,6 +154,57 @@ body {
 	border-radius: 16px;
 	user-select: none;
 	-webkit-user-select: none;
+	/* The frog's lily:pond background, bottom center */
+	background-image: url("images/lily-pad.svg");
+	background-repeat: no-repeat;
+	background-position: left 50% bottom -25px;
+	background-size: 25%;
+}
+
+/* Lilies: shared property */
+.lily {
+	position: absolute;
+}
+
+/* Each lily's own position */
+#lily-left {
+	width: 15%;
+	left: 3%;
+	bottom: 18%;
+}
+
+#lily-right {
+	width: 12%;
+	right: 5%;
+	bottom: 40%;
+}
+
+/* Ripples */
+.ripple {
+	position: absolute;
+	border: 2px solid var(--pond-deep);
+	border-radius: 50%;
+}
+
+#ripple-1 {
+	left: 21%;
+	bottom: 66%;
+	width: 18%;
+	height: 11%;
+}
+
+#ripple-2 {
+	left: 61%;
+	bottom: 55%;
+	width: 14%;
+	height: 8%;
+}
+
+#ripple-3 {
+	left: 30%;
+	bottom: 29%;
+	width: 23%;
+	height: 14%;
 }
 
 #frog {
@@ -246,6 +297,7 @@ body {
 
 	#pond {
 		height: 240px;
+		background-position: left 50% bottom -8px;
 	}
 	:root {
 		--fly-size: 6vw;
@@ -269,7 +321,6 @@ body {
 	}
 	#game-container {
 		width: 40vw;
-		
 	}
 	#pond {
 		height: 20vw;
@@ -282,7 +333,6 @@ body {
 	}
 	#game-container {
 		width: 50vw;
-	
 	}
 	#pond {
 		height: 700px;
@@ -320,8 +370,6 @@ body {
 .rules li {
 	margin-bottom: 6px;
 }
-
-
 
 /* The white box in the middle */
 .panel {
