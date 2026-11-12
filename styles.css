@@ -279,9 +279,6 @@ body {
 		height: 240px;
 		background-position: left 50% bottom -8px;
 	}
-	:root {
-		--fly-size: 6vw;
-	}
 	.intro {
 		padding-top: 80px;
 	}
