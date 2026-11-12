@@ -197,6 +197,8 @@ body {
 	left: 0;
 	right: 0;
 	margin: 0 auto;
+	/* Soft white edge, so every frog color stands out from the lily */
+	filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff);
 	/* Grow with the pond, but never too tiny or too huge */
 	width: calc(var(--fly-size) * var(--frog-to-fly) + 2px);
 }
