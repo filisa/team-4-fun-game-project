@@ -6,7 +6,11 @@
 		<title>Hungry Frog</title>
 		<link rel="stylesheet" href="styles.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="images/apple-touch-icon.png"
+		/>
 		<link rel="manifest" href="site.webmanifest" />
 		<link
 			rel="stylesheet"
@@ -18,7 +22,8 @@
 		<header class="intro">
 			<h1>Hungry Frog</h1>
 			<p class="lede">
-				Tap anywhere to shoot the frog's tongue. Catch as many flies as you can in 30 seconds.
+				Click or tap anywhere to shoot the frog's tongue. Catch as many flies as you can
+				in 30 seconds.
 			</p>
 		</header>
 		<!-- Game container: stats bar and pond -->
@@ -40,11 +45,18 @@
 				role="application"
 				aria-label="Pond. Arrow keys to aim, Space or Enter to shoot the tongue."
 			>
-				<!--Welcome screen that disappears on tap -->
+				<!-- Pond decoration: 2 lily pads and three ripples, behind everything -->
+				<img class="lily" id="lily-left" src="images/lily-pad.svg" alt="" />
+				<img class="lily" id="lily-right" src="images/lily-pad.svg" alt="" />
+				<div class="ripple" id="ripple-1"></div>
+				<div class="ripple" id="ripple-2"></div>
+				<div class="ripple" id="ripple-3"></div>
+
+				<!-- Welcome screen that disappears on tap -->
 				<section id="welcome-screen" aria-labelledby="welcome-title">
 					<div class="panel">
 						<h2 id="welcome-title">Hungry frog</h2>
-		
+
 						<button id="start-button">Tap to start</button>
 					</div>
 				</section>
@@ -64,7 +76,7 @@
 				<div id="aim" aria-hidden="true"></div>
 			</div>
 		</main>
-		
+
 		<script src="script.js"></script>
 
 		<!-- Footer: frog icon and team names -->
@@ -78,6 +90,5 @@
 			</ul>
 			<p class="footer-note">Hyper Island project 2026</p>
 		</footer>
-
 	</body>
 </html>
