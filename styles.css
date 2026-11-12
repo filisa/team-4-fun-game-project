@@ -27,6 +27,7 @@
 
 .fly {
 	position: absolute;
+	height: var(--fly-size);
 	animation-name: fly-across;
 	animation-duration: var(--duration);
 	animation-delay: var(--delay);
@@ -55,6 +56,10 @@
 	--fg: #23211c;
 	--muted: #6b675c;
 
+	/* Sizes: the frog is always this many flies wide */
+	--fly-size: 6vw;
+	--frog-to-fly: 2.75;
+
 	/* Fonts */
 	--display: "Baloo 2", system-ui, sans-serif;
 	--body: "Nunito Sans", system-ui, sans-serif;
@@ -63,39 +68,47 @@
 /* ==========================================
    Base styles that use the variables
    ========================================== */
-/* Header Styles */
-.site-header {
-	background-color: #0f172a; /* Dark background matching footer */
-	border-bottom: 2px solid #334155;
-	padding: 1rem 1.5rem;
-	position: sticky;
-	top: 0;
-	z-index: 1000;
-	margin-bottom: 4vw;
+/* Page intro: tag, title and rules */
+.intro {
+	max-width: 520px;
+	margin: 0 auto;
+	padding: 48px 16px 24px;
+	text-align: center;
 }
 
-.header-container {
-	max-width: 1100px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.logo {
-	font-size: 1.6rem;
-	font-weight: bold;
-	color: #4ade80; /* Frog green accent */
-	text-decoration: none;
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	margin: 0;
-}
-
-.header-subtitle {
-	color: #94a3b8;
-	font-size: 0.95rem;
+.tag {
+	display: inline-block;
+	margin: 0 0 12px;
+	padding: 4px 14px;
+	border-radius: 999px;
+	background-color: #fbe3df;
+	color: #c2473a;
+	font-family: var(--display);
 	font-weight: 500;
+	font-size: 15px;
+}
+
+.intro h1 {
+	margin: 0 0 8px;
+	font-family: var(--display);
+	font-weight: 700;
+	font-size: clamp(36px, 6vw, 56px);
+	line-height: 1.1;
+}
+
+.lede {
+	margin: 0;
+	color: var(--muted);
+	font-size: 18px;
+	line-height: 1.6;
+}
+
+.caption {
+	margin: 0 auto 32px;
+	padding: 0 16px;
+	text-align: center;
+	color: var(--muted);
+	font-size: 14px;
 }
 
 html {
@@ -109,13 +122,14 @@ body {
 	margin: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	height: auto;
+	min-height: 100vh;
+	min-height: 100dvh;
 }
 
 /* Game container: stats bar and pond */
 #game-container {
-	margin: 0 auto 4vw;
+	margin: 0 auto 16px;
 	padding: 20px;
 	background-color: var(--surface);
 	border: 1px solid var(--line);
@@ -145,8 +159,13 @@ body {
 #frog {
 	position: absolute;
 	bottom: 0;
-	left: 40%;
-	width: 100px;
+	/* Center horizontally at any screen size.
+	   (margin auto keeps offsetLeft accurate for the tongue in script.js) */
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	/* Grow with the pond, but never too tiny or too huge */
+	width: calc(var(--fly-size) * var(--frog-to-fly) + 2px);
 }
 
 #tongue {
@@ -165,25 +184,77 @@ body {
 #tongue.tongue-out {
 	transform: translateY(-50%) rotate(var(--angle, 0rad)) scaleX(1);
 }
+
+/* ==========================================
+   Accessibility
+   ========================================== */
+
+/* Hidden on screen but still read by screen readers */
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Clear focus ring for keyboard users */
+#pond:focus-visible,
+#start-button:focus-visible,
+#play-again:focus-visible {
+	outline: 3px solid var(--frog-dark);
+	outline-offset: 3px;
+}
+
+/* Aim marker: a ring that keyboard players move with the arrow keys */
+#aim {
+	display: none;
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	transform: translate(-50%, -50%);
+	border: 3px solid var(--frog-dark);
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px var(--surface);
+	pointer-events: none;
+	z-index: 3;
+}
+
+/* Only show it while the pond has keyboard focus */
+#pond:focus-visible #aim {
+	display: block;
+}
+
+/* Less motion if the device asks for it */
+@media (prefers-reduced-motion: reduce) {
+	#tongue {
+		transition-duration: 0.1s;
+	}
+}
 /* Responsiveness - Media query for small screens */
 @media (max-width: 520px) {
 	#game-container {
 		width: auto;
-		margin: 16px 16px 24px;
+		/* top auto + footer's margin-top auto split the free space,
+		   so the game sits in the vertical middle of the page */
+		margin: auto 16px 16px;
 	}
 
 	#pond {
 		height: 240px;
 	}
-	.fly {
-		height: 6vw;
+	:root {
+		--fly-size: 6vw;
 	}
-	.footer-links {
-		display: none;
+	.intro {
+		padding-top: 80px;
 	}
-	body {
-		min-height: 100%;
-		overflow: hidden;
+	.lede {
+		font-size: 16px;
 	}
 }
 
@@ -193,8 +264,8 @@ body {
 		min-height: 100dvh;
 	}
 
-	.fly {
-		height: 2vw;
+	:root {
+		--fly-size: 2vw;
 	}
 	#game-container {
 		width: 40vw;
@@ -206,8 +277,8 @@ body {
 }
 
 @media (min-width: 2000px) {
-	.fly {
-		height: 1.5vw;
+	:root {
+		--fly-size: 1.5vw;
 	}
 	#game-container {
 		width: 50vw;
@@ -237,6 +308,21 @@ body {
 	display: none;
 }
 
+.rules {
+	list-style: none;
+	padding: 0;
+	margin: 12px 0;
+	color: var(--muted);
+	font-size: 15px;
+	text-align: center;
+}
+
+.rules li {
+	margin-bottom: 6px;
+}
+
+
+
 /* The white box in the middle */
 .panel {
 	padding: 24px 48px;
@@ -250,93 +336,67 @@ body {
 	margin: 0;
 }
 
+@media (max-width: 520px) {
+	.panel {
+		padding: 24px 16px;
+	}
+}
+
 /* Start & play again button: look like plain text */
 #start-button,
 #play-again {
 	margin-top: 4px;
-	padding: 0;
+	/* big enough to tap easily (at least 44px tall) */
+	min-height: 44px;
+	padding: 8px 16px;
 	border: none;
+	border-radius: 999px;
 	background: none;
 	color: var(--muted);
+	text-decoration: underline;
+	text-underline-offset: 3px;
 	font-family: var(--body);
 	font-size: 16px;
 	cursor: pointer;
 }
-/* Footer Styles */
+/* Footer: frog icon and team names */
 .site-footer {
-	width: 100%;
-	box-sizing: border-box;
-	background-color: #1e293b; /* Dark background */
-	color: #f8fafc;
-	padding: 2rem 1rem 1rem;
-	font-family: var(--body), sans-serif;
-	margin-top: 4vw;
-	align-self: flex-end;
-	justify-self: flex-end;
+	margin-top: auto;
+	padding: 24px 16px 32px;
+	border-top: 1px solid var(--line);
+	background-color: #eef5ea;
+	text-align: center;
+	color: var(--muted);
 }
 
-@media (min-width: 521px) {
-	.site-footer {
-		margin-top: auto;
-	}
+.footer-frog {
+	width: 48px;
+	display: block;
+	margin: 0 auto 8px;
 }
 
-.footer-container {
-	max-width: 80%;
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	align-items: flex-start;
-	gap: 2rem;
+.footer-title {
+	margin: 0 0 8px;
+	font-family: var(--display);
+	font-weight: 700;
+	font-size: 18px;
+	color: var(--fg);
 }
 
-.footer-brand h3 {
-	color: #4ade80; /* Frog green accent */
-	margin: 0 0 0.5rem 0;
-	font-size: 1.5rem;
-}
-
-.footer-brand p {
-	color: #94a3b8;
-	margin: 0;
-	font-size: 0.9rem;
-}
-
-.footer-links h4 {
-	margin: 0 0 0.5rem 0;
-	color: #f8fafc;
-	font-size: 1rem;
-}
-
-.footer-links ul {
+.team {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 4px 16px;
+	font-size: 14px;
 }
 
-.footer-links li {
-	margin-bottom: 0.4rem;
-}
-
-.footer-links a {
-	color: #cbd5e1;
-	text-decoration: none;
-	font-size: 0.9rem;
-	transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-	color: #4ade80; /* Turns green on hover */
-}
-
-.footer-credits {
-	width: 100%;
-	border-top: 1px solid #334155;
-	padding-top: 1rem;
-	text-align: center;
-	color: #64748b;
-	font-size: 0.85rem;
+.footer-note {
+	margin: 12px 0 0;
+	font-size: 13px;
 }
 
 /* End screen: covers the whole pond, same idea as the welcome screen */
