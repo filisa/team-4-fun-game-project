@@ -144,6 +144,7 @@ pond.addEventListener("click", function (event) {
 	//pond location
 	const pondBox = pond.getBoundingClientRect();
 	shootAt(event.clientX - pondBox.left, event.clientY - pondBox.top);
+	changeFlyColor();
 });
 
 //Keyboard play: arrow keys move the aim marker, Space or Enter shoots
@@ -172,6 +173,7 @@ pond.addEventListener("keydown", function (event) {
 
 	event.preventDefault(); // stop arrow keys and Space from scrolling the page
 	moveAim();
+	changeFlyColor();
 });
 
 //shoot the tongue at a point inside the pond (works for clicks and keys)
