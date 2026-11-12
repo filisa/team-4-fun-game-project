@@ -203,7 +203,7 @@ body {
 	position: absolute;
 	height: 8px;
 	width: 0;
-	background-color: #e8607a;
+	background-color: var(--tongue);
 	border-radius: 999px;
 	transform-origin: left center;
 	transform: translateY(-50%) rotate(var(--angle, 0rad)) scaleX(0);
