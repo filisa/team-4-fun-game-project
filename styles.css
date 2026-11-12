@@ -1,3 +1,34 @@
+/* Variables: colors, sizes and fonts, used everywhere with var() */
+:root {
+	/* Page and cards */
+	--bg: #fbfaf6;
+	--surface: #ffffff;
+	--line: #e2ded2;
+
+	/* Pond scene */
+	--pond: #cfe8e6;
+	--pond-deep: #afd6d3;
+	--lily: #7dba6a;
+
+	/* Characters */
+	--frog: #58ae4a;
+	--frog-dark: #2f7a35;
+	--fly: #2a2926;
+	--tongue: #e8607a;
+
+	/* Text */
+	--fg: #23211c;
+	--muted: #6b675c;
+
+	/* Sizes: the frog is always this many flies wide */
+	--fly-size: 6vw;
+	--frog-to-fly: 2.75;
+
+	/* Fonts */
+	--display: "Baloo 2", system-ui, sans-serif;
+	--body: "Nunito Sans", system-ui, sans-serif;
+}
+
 @keyframes fly-across {
 	0% {
 		left: -5%;
@@ -33,36 +64,6 @@
 	animation-delay: var(--delay);
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
-}
-
-/* Page and cards */
-:root {
-	--bg: #fbfaf6;
-	--surface: #ffffff;
-	--line: #e2ded2;
-
-	/* Pond scene */
-	--pond: #cfe8e6;
-	--pond-deep: #afd6d3;
-	--lily: #7dba6a;
-
-	/* Characters */
-	--frog: #58ae4a;
-	--frog-dark: #2f7a35;
-	--fly: #2a2926;
-	--tongue: #e8607a;
-
-	/* Text */
-	--fg: #23211c;
-	--muted: #6b675c;
-
-	/* Sizes: the frog is always this many flies wide */
-	--fly-size: 6vw;
-	--frog-to-fly: 2.75;
-
-	/* Fonts */
-	--display: "Baloo 2", system-ui, sans-serif;
-	--body: "Nunito Sans", system-ui, sans-serif;
 }
 
 /* ==========================================
