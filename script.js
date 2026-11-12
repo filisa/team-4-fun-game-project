@@ -21,7 +21,9 @@ function announce(message) {
 }
 
 // people who asked their device for less motion get slower flies
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduceMotion = window.matchMedia(
+	"(prefers-reduced-motion: reduce)"
+).matches;
 
 //Welcome screen: hides when you click it
 const welcomeScreen = document.getElementById("welcome-screen");
@@ -102,6 +104,8 @@ function catchFliesAt(x, y) {
 	const allFlies = pond.querySelectorAll(".fly");
 
 	allFlies.forEach(function (fly) {
+		if (fly.dataset.caught) return;
+
 		// ask the browser where this fly is right now (CSS is moving it)
 		const box = fly.getBoundingClientRect();
 		const flyX = box.left - pondBox.left + box.width / 2;
@@ -111,11 +115,20 @@ function catchFliesAt(x, y) {
 		const distance = Math.hypot(flyX - x, flyY - y);
 
 		if (distance < CATCH_RADIUS) {
+			fly.dataset.caught = "true";
 			score++; // +1 point
 			scoreEl.textContent = score; // show it on the page
 			announce("Caught one! " + score + (score === 1 ? " fly." : " flies."));
-			fly.remove(); // the fly is gone
-			createFly(); // a new fly arrives
+			fly.src = "images/plus1.png";
+
+			setTimeout(() => {
+				fly.src = "images/plus1.png";
+
+				setTimeout(() => {
+					fly.remove(); // the fly is gone
+					createFly(); // a new fly arrives
+				}, 200);
+			}, 200);
 		}
 	});
 }
@@ -131,6 +144,7 @@ pond.addEventListener("click", function (event) {
 	//pond location
 	const pondBox = pond.getBoundingClientRect();
 	shootAt(event.clientX - pondBox.left, event.clientY - pondBox.top);
+	changeFlyColor();
 });
 
 //Keyboard play: arrow keys move the aim marker, Space or Enter shoots
@@ -159,6 +173,7 @@ pond.addEventListener("keydown", function (event) {
 
 	event.preventDefault(); // stop arrow keys and Space from scrolling the page
 	moveAim();
+	changeFlyColor();
 });
 
 //shoot the tongue at a point inside the pond (works for clicks and keys)
@@ -195,6 +210,7 @@ function shootAt(clickX, clickY) {
 			tongueBusy = false;
 		}, TONGUE_TIME);
 	}, TONGUE_TIME);
+	changeFlyColor();
 }
 
 //this function will trigger when the game is over
@@ -229,8 +245,12 @@ function showEndScreen() {
 	endScreen.classList.remove("hidden");
 	renderTheBestScore();
 	announce(
-		"Time's up! You caught " + score + (score === 1 ? " fly." : " flies.") +
-			" Best score " + bestEl.textContent + "."
+		"Time's up! You caught " +
+			score +
+			(score === 1 ? " fly." : " flies.") +
+			" Best score " +
+			bestEl.textContent +
+			"."
 	);
 	playAgainButton.focus(); // keyboard players land on Play again
 }
@@ -252,3 +272,21 @@ function playAgain(event) {
 }
 
 playAgainButton.addEventListener("click", playAgain);
+
+function changeFlyColor() {
+	if (score >= 5 && score < 15) {
+		frog.src = "images/frog_blue.svg";
+	} else if (score >= 15 && score < 20) {
+		frog.src = "images/frog_pink.svg";
+	} else if (score >= 20 && score < 25) {
+		frog.src = "images/frog_yellow.svg";
+	} else if (score >= 25 && score < 30) {
+		frog.src = "images/frog_diamond.svg";
+	} else if (score >= 30 && score < 50) {
+		frog.src = "images/frog_gold.svg";
+	} else if (score >= 50) {
+		frog.src = "images/frog_holographic.svg";
+	} else {
+		frog.src = "images/frog.svg";
+	}
+}
