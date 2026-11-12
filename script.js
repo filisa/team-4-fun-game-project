@@ -122,8 +122,12 @@ function catchFliesAt(x, y) {
 			fly.src = "images/plus1.png";
 
 			setTimeout(() => {
-				fly.remove(); // the fly is gone
-				createFly(); // a new fly arrives
+				fly.src = "images/plus1.png";
+
+				setTimeout(() => {
+					fly.remove(); // the fly is gone
+					createFly(); // a new fly arrives
+				}, 200);
 			}, 200);
 		}
 	});
@@ -204,6 +208,7 @@ function shootAt(clickX, clickY) {
 			tongueBusy = false;
 		}, TONGUE_TIME);
 	}, TONGUE_TIME);
+	changeFlyColor();
 }
 
 //this function will trigger when the game is over
