@@ -68,24 +68,12 @@
 /* ==========================================
    Base styles that use the variables
    ========================================== */
-/* Page intro: tag, title and rules */
+/* Page intro: title and rules */
 .intro {
 	max-width: 520px;
 	margin: 0 auto;
 	padding: 48px 16px 24px;
 	text-align: center;
-}
-
-.tag {
-	display: inline-block;
-	margin: 0 0 12px;
-	padding: 4px 14px;
-	border-radius: 999px;
-	background-color: #fbe3df;
-	color: #c2473a;
-	font-family: var(--display);
-	font-weight: 500;
-	font-size: 15px;
 }
 
 .intro h1 {
@@ -101,14 +89,6 @@
 	color: var(--muted);
 	font-size: 18px;
 	line-height: 1.6;
-}
-
-.caption {
-	margin: 0 auto 32px;
-	padding: 0 16px;
-	text-align: center;
-	color: var(--muted);
-	font-size: 14px;
 }
 
 html {
@@ -358,19 +338,6 @@ body {
 	display: none;
 }
 
-.rules {
-	list-style: none;
-	padding: 0;
-	margin: 12px 0;
-	color: var(--muted);
-	font-size: 15px;
-	text-align: center;
-}
-
-.rules li {
-	margin-bottom: 6px;
-}
-
 /* The white box in the middle */
 .panel {
 	padding: 24px 48px;
@@ -407,7 +374,7 @@ body {
 	font-size: 16px;
 	cursor: pointer;
 }
-/* Footer: frog icon and team names */
+/* Footer: team names */
 .site-footer {
 	margin-top: auto;
 	padding: 24px 16px 32px;
@@ -415,12 +382,6 @@ body {
 	background-color: #eef5ea;
 	text-align: center;
 	color: var(--muted);
-}
-
-.footer-frog {
-	width: 48px;
-	display: block;
-	margin: 0 auto 8px;
 }
 
 .footer-title {
