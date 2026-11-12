@@ -1,3 +1,35 @@
+/* Variables: colors, sizes and fonts, used everywhere with var() */
+:root {
+	/* Page and cards */
+	--bg: #fbfaf6;
+	--surface: #ffffff;
+	--line: #e2ded2;
+	--footer-bg: #eef5ea;
+
+	/* Pond scene */
+	--pond: #cfe8e6;
+	--pond-deep: #afd6d3;
+	--lily: #7dba6a;
+
+	/* Characters */
+	--frog: #58ae4a;
+	--frog-dark: #2f7a35;
+	--fly: #2a2926;
+	--tongue: #e8607a;
+
+	/* Text */
+	--fg: #23211c;
+	--muted: #6b675c;
+
+	/* Sizes: the frog is always this many flies wide */
+	--fly-size: 6vw;
+	--frog-to-fly: 2.75;
+
+	/* Fonts */
+	--display: "Baloo 2", system-ui, sans-serif;
+	--body: "Nunito Sans", system-ui, sans-serif;
+}
+
 @keyframes fly-across {
 	0% {
 		left: -5%;
@@ -35,57 +67,15 @@
 	animation-timing-function: linear;
 }
 
-/* Page and cards */
-:root {
-	--bg: #fbfaf6;
-	--surface: #ffffff;
-	--line: #e2ded2;
-
-	/* Pond scene */
-	--pond: #cfe8e6;
-	--pond-deep: #afd6d3;
-	--lily: #7dba6a;
-
-	/* Characters */
-	--frog: #58ae4a;
-	--frog-dark: #2f7a35;
-	--fly: #2a2926;
-	--tongue: #e8607a;
-
-	/* Text */
-	--fg: #23211c;
-	--muted: #6b675c;
-
-	/* Sizes: the frog is always this many flies wide */
-	--fly-size: 6vw;
-	--frog-to-fly: 2.75;
-
-	/* Fonts */
-	--display: "Baloo 2", system-ui, sans-serif;
-	--body: "Nunito Sans", system-ui, sans-serif;
-}
-
 /* ==========================================
    Base styles that use the variables
    ========================================== */
-/* Page intro: tag, title and rules */
+/* Page intro: title and rules */
 .intro {
 	max-width: 520px;
 	margin: 0 auto;
 	padding: 48px 16px 24px;
 	text-align: center;
-}
-
-.tag {
-	display: inline-block;
-	margin: 0 0 12px;
-	padding: 4px 14px;
-	border-radius: 999px;
-	background-color: #fbe3df;
-	color: #c2473a;
-	font-family: var(--display);
-	font-weight: 500;
-	font-size: 15px;
 }
 
 .intro h1 {
@@ -101,14 +91,6 @@
 	color: var(--muted);
 	font-size: 18px;
 	line-height: 1.6;
-}
-
-.caption {
-	margin: 0 auto 32px;
-	padding: 0 16px;
-	text-align: center;
-	color: var(--muted);
-	font-size: 14px;
 }
 
 html {
@@ -223,7 +205,7 @@ body {
 	position: absolute;
 	height: 8px;
 	width: 0;
-	background-color: #e8607a;
+	background-color: var(--tongue);
 	border-radius: 999px;
 	transform-origin: left center;
 	transform: translateY(-50%) rotate(var(--angle, 0rad)) scaleX(0);
@@ -286,58 +268,6 @@ body {
 		transition-duration: 0.1s;
 	}
 }
-/* Responsiveness - Media query for small screens */
-@media (max-width: 520px) {
-	#game-container {
-		width: auto;
-		/* top auto + footer's margin-top auto split the free space,
-		   so the game sits in the vertical middle of the page */
-		margin: auto 16px 16px;
-	}
-
-	#pond {
-		height: 240px;
-		background-position: left 50% bottom -8px;
-	}
-	:root {
-		--fly-size: 6vw;
-	}
-	.intro {
-		padding-top: 80px;
-	}
-	.lede {
-		font-size: 16px;
-	}
-}
-
-@media (min-width: 521px) {
-	body {
-		min-height: 100vh;
-		min-height: 100dvh;
-	}
-
-	:root {
-		--fly-size: 2vw;
-	}
-	#game-container {
-		width: 40vw;
-	}
-	#pond {
-		height: 20vw;
-	}
-}
-
-@media (min-width: 2000px) {
-	:root {
-		--fly-size: 1.5vw;
-	}
-	#game-container {
-		width: 50vw;
-	}
-	#pond {
-		height: 700px;
-	}
-}
 
 /* Welcome screen: covers the whole pond */
 #welcome-screen {
@@ -358,19 +288,6 @@ body {
 	display: none;
 }
 
-.rules {
-	list-style: none;
-	padding: 0;
-	margin: 12px 0;
-	color: var(--muted);
-	font-size: 15px;
-	text-align: center;
-}
-
-.rules li {
-	margin-bottom: 6px;
-}
-
 /* The white box in the middle */
 .panel {
 	padding: 24px 48px;
@@ -384,43 +301,30 @@ body {
 	margin: 0;
 }
 
-@media (max-width: 520px) {
-	.panel {
-		padding: 24px 16px;
-	}
-}
-
-/* Start & play again button: look like plain text */
+/* Start & play again buttons */
 #start-button,
 #play-again {
-	margin-top: 4px;
-	/* big enough to tap easily (at least 44px tall) */
-	min-height: 44px;
-	padding: 8px 16px;
+	margin-top: 12px;
+	min-height: 44px; /* big enough to tap easily */
+	padding: 10px 28px;
 	border: none;
-	border-radius: 999px;
-	background: none;
-	color: var(--muted);
-	text-decoration: underline;
-	text-underline-offset: 3px;
+	border-radius: 12px;
+	background-color: var(--fg);
+	color: var(--surface);
 	font-family: var(--body);
 	font-size: 16px;
+	font-weight: 700;
 	cursor: pointer;
 }
-/* Footer: frog icon and team names */
+
+/* Footer: team names */
 .site-footer {
 	margin-top: auto;
 	padding: 24px 16px 32px;
 	border-top: 1px solid var(--line);
-	background-color: #eef5ea;
+	background-color: var(--footer-bg);
 	text-align: center;
 	color: var(--muted);
-}
-
-.footer-frog {
-	width: 48px;
-	display: block;
-	margin: 0 auto 8px;
 }
 
 .footer-title {
@@ -457,10 +361,63 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 2;
+	z-index: 1;
 }
 
 /* Hidden end screen, class added or removed by JavaScript */
 #end-screen.hidden {
 	display: none;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+/* Phones: 520px wide or less */
+@media (max-width: 520px) {
+	#game-container {
+		width: auto; /* fill the phone's width */
+		margin: auto 16px 16px; /* 16px from the edges; "auto" on top centers the game vertically */
+	}
+
+	#pond {
+		height: 240px; /* a fixed, shorter pond */
+		background-position: left 50% bottom -8px; /* smaller lily, so push it down less */
+	}
+	.intro {
+		padding-top: 80px; /* more space above the title */
+	}
+	.lede {
+		font-size: 16px; /* slightly smaller directions text */
+	}
+
+	.panel {
+		padding: 24px 32px; /* less side padding than desktop, so it fits the small pond */
+	}
+}
+
+/* Tablets and desktops: wider than 520px */
+@media (min-width: 521px) {
+	:root {
+		--fly-size: 2vw; /* flies (and the frog) are 2% of the window width */
+	}
+	#game-container {
+		width: 40vw; /* the game is 40% of the window width */
+	}
+	#pond {
+		height: 20vw; /* half as tall as it is wide */
+	}
+}
+
+/* Big screens: 2000px wide or more */
+@media (min-width: 2000px) {
+	:root {
+		--fly-size: 1.5vw; /* a bit smaller, so flies don't get huge */
+	}
+	#game-container {
+		width: 50vw; /* a bit wider */
+	}
+	#pond {
+		height: 700px; /* a fixed height, so it doesn't get too tall */
+	}
 }
