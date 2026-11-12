@@ -289,11 +289,6 @@ body {
 }
 
 @media (min-width: 521px) {
-	body {
-		min-height: 100vh;
-		min-height: 100dvh;
-	}
-
 	:root {
 		--fly-size: 2vw;
 	}
