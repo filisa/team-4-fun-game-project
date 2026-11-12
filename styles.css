@@ -4,6 +4,7 @@
 	--bg: #fbfaf6;
 	--surface: #ffffff;
 	--line: #e2ded2;
+	--footer-bg: #eef5ea;
 
 	/* Pond scene */
 	--pond: #cfe8e6;
@@ -372,7 +373,7 @@ body {
 	margin-top: auto;
 	padding: 24px 16px 32px;
 	border-top: 1px solid var(--line);
-	background-color: #eef5ea;
+	background-color: var(--footer-bg);
 	text-align: center;
 	color: var(--muted);
 }
